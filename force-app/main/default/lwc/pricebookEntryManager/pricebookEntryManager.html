@@ -1,0 +1,121 @@
+<template>
+     
+<lightning-card title="Price Book Entries" icon-name="standard:pricebook">
+    
+   <lightning-button label="Add Products" slot="actions" onclick={handleOpenModal}></lightning-button>
+    <div class="slds-p-horizontal_small slds-m-bottom_small">
+        <lightning-input
+            type="search"
+            placeholder="Search by product name"
+            onchange={handleEntrySearch}>
+        </lightning-input>
+    </div>
+
+    <p style="font-weight:bold; margin-left:10px">
+        Showing {pricebookEntries.length} of {totalRecords} records
+    </p>
+
+    <lightning-datatable
+        key-field="Id"
+        data={pricebookEntries}
+        columns={columns}
+        hide-checkbox-column
+        is-loading={isLoading}>
+    </lightning-datatable>
+
+  <template if:false={allDataLoaded}>
+    <div class="slds-align_absolute-center slds-m-around_medium">
+        <lightning-button
+            label="Load More"
+            variant="brand"
+            onclick={handleLoadMore}
+            disabled={isLoading}>
+        </lightning-button>
+
+        <!-- Spinner -->
+        <template if:true={isLoading}>
+            <lightning-spinner
+                alternative-text="Loading records"
+                size="small">
+            </lightning-spinner>
+        </template>
+    </div>
+</template>
+
+
+</lightning-card>
+
+
+
+
+    <!-- Product Selection Modal -->
+    <template if:true={isProductSelectModal}>
+        <section role="dialog" class="slds-modal slds-fade-in-open">
+            <div class="slds-modal__container">
+                <header class="slds-modal__header">
+                    <h2 class="slds-text-heading_medium">Select Products</h2>
+                </header>
+         <div class="slds-modal__content slds-p-around_medium">
+    <lightning-input 
+        placeholder="Search by product name"
+        value={searchKey} 
+        onchange={handleSearch}>
+    </lightning-input>
+
+    <!-- Display selected count -->
+    <p style="font-weight:bold; margin-bottom: 10px;">
+    Selected Products: {selectedProductsCount}
+</p>
+
+
+    <lightning-datatable
+    key-field="Id"
+    data={products}
+    columns={productColumns}
+    selected-rows={selectedProductIds}
+    onrowselection={handleProductSelect}
+    enable-infinite-loading
+    onloadmore={handleProductLoadMore}>
+</lightning-datatable>
+
+</div>
+
+                <footer class="slds-modal__footer">
+                    <lightning-button label="Cancel" onclick={handleCloseModal} style="margin-right:10px"></lightning-button>
+
+                    <lightning-button variant="brand" label="Add Selected" onclick={handleAddProducts}></lightning-button>
+                </footer>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+    </template>
+
+    <!-- Edit Pricebook Details Modal -->
+    <template if:true={isProductEditModal}>
+        <section role="dialog" class="slds-modal slds-fade-in-open">
+            <div class="slds-modal__container">
+                <header class="slds-modal__header">
+                    <h2 class="slds-text-heading_medium">Set Pricebook Entry Details</h2>
+                </header>
+                <div class="slds-modal__content slds-p-around_medium  sun">
+                   <lightning-datatable
+    key-field="Id"
+    data={editableProducts}
+    columns={editColumns}
+    draft-values={draftValues}
+    suppress-bottom-bar
+    hide-checkbox-column
+    oncellchange={handleCellChange}>
+    hide-checkbox-column>
+</lightning-datatable>
+
+                </div>
+                <footer class="slds-modal__footer">
+                    <lightning-button label="Cancel" onclick={handleCloseModal} style="margin-right:10px"></lightning-button>
+                    <lightning-button variant="brand" label="Save" onclick={handleFinalSave}></lightning-button>
+                </footer>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+    </template>
+</template>

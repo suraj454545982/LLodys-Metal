@@ -1,0 +1,243 @@
+<template>
+    <!-- Welcome Page -->
+    <template if:true={showWelcome}>
+        <div class="welcome-container" style={backgroundImageStyle}>
+            <!-- Main content overlay -->
+            <div class="content-overlay">
+                <div class="main-content">
+                    <h1 class="page-title">Welcome</h1>
+                    <h2 class="sub-title">Let's Strengthen Our Sales Performance</h2>
+                    <div class="description-container">
+                        <p class="description">Your experience with our sales team matters.</p>
+                        <p class="description">Tell us what we're doing well & where we can improve.</p>
+                    </div>
+                    <lightning-button label="Click here to share your feedback" variant="brand" onclick={startSurvey}
+                        class="feedback-button">
+                    </lightning-button>
+                </div>
+            </div>
+        </div>
+    </template>
+    <template if:true={showOtpModal}>
+        <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true"
+            aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+            <div class="slds-modal__container">
+                <header class="slds-modal__header">
+                    <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse"
+                            title="Close" onclick={closeModal}>
+                        <lightning-icon icon-name="utility:close" alternative-text="close" size="small"></lightning-icon>
+                        <span class="slds-assistive-text">Close</span>
+                    </button>
+                    <h2 id="modal-heading-01" class="slds-modal__title slds-hyphenate">Enter OTP</h2>
+                </header>
+                <div class="slds-modal__content slds-var-p-around_medium" id="modal-content-id-1">
+                    <div class="slds-form-element">
+                        <label class="slds-form-element__label" for="otp-input">
+                            <abbr class="slds-required" title="required">* </abbr>
+                            One-Time Password
+                        </label>
+                        <div class="slds-form-element__control">
+                            <lightning-input id="otp-input" type="text" value={otpValue} onchange={handleOtpChange}
+                                placeholder="Enter 6-digit OTP" max-length="6" pattern="[0-9]{6}"
+                                class="otp-input-field">
+                            </lightning-input>
+                        </div>
+                    </div>
+
+                    <div class="slds-var-m-top_large">
+                        <p class="slds-text-body_regular slds-text-color_weak">
+                            Please enter the 6-digit OTP sent to your registered mobile number or email.
+                        </p>
+                    </div>
+                </div>
+                <footer class="slds-modal__footer">
+                    <lightning-button label="Cancel" variant="neutral" onclick={closeModal}>
+                    </lightning-button>
+                    <lightning-button label="Verify OTP" variant="brand" onclick={verifyOtp}
+                        disabled={isVerifyDisabled}>
+                    </lightning-button>
+                </footer>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+    </template>
+
+    <!-- Survey Form -->
+    <template if:true={showSurvey}>
+        <div class="survey-container">
+            <h1 class="page-title">Sales Team Performance Feedback</h1>
+            <div class="intro-card">
+                <p class="description">Thank you for taking the time to provide valuable feedback on your recent
+                    interactions with our sales team. Your insights are crucial in helping us enhance our services and
+                    ensure we meet your specific needs in the metal & mining industry. Please be assured that your
+                    responses will be treated with confidentiality and used solely for improvement purposes.</p>
+            </div>
+
+            <!-- Respondent Information -->
+            <div class="form-section">
+                <h2 class="section-title">
+                    <lightning-icon icon-name="utility:user" size="small" class="section-icon"></lightning-icon>
+                    Respondent Information (Optional but Recommended for Segmentation)
+                </h2>
+                <div class="form-grid">
+                    <lightning-input label="Name" value={respondentInfo.name} onchange={handleInputChange} name="name"
+                        class="form-field" required></lightning-input>
+                    <lightning-input label="Email" value={respondentInfo.email} onchange={handleInputChange}
+                        name="email" type="email" class="form-field" disabled ={respondentInfo.email}></lightning-input>
+                    <lightning-input label="Phone" value={respondentInfo.phone} onchange={handleInputChange}
+                        name="phone" type="tel" class="form-field"></lightning-input>
+                    <lightning-input label="Company Name" value={respondentInfo.companyName} disabled
+                        onchange={handleInputChange} name="companyName" class="form-field"></lightning-input>
+                    <lightning-combobox label="Your Role/Title" value={respondentInfo.role} options={roleOptions}
+                        onchange={handleInputChange} name="role" class="form-field"></lightning-combobox>
+                    <lightning-combobox label="Your Company Type" value={respondentInfo.companyType}
+                        options={companyTypeOptions} onchange={handleInputChange} name="companyType" class="form-field">
+                    </lightning-combobox>
+                    <template if:true={showRoleOther}>
+                        <lightning-textarea name="roleOther" onchange={handleInputChange} label="Please specify Role/Title">
+                        </lightning-textarea>
+
+                    </template>
+                    <template if:true={showCTOther}>
+                        <lightning-textarea name="cTOther" onchange={handleInputChange} label="Please specify Company Type">
+                        </lightning-textarea>
+                    </template>
+                    <lightning-combobox label="Primary Products/Services of Interest" value={respondentInfo.products}
+                        options={productOptions} onchange={handleInputChange} name="products" class="form-field">
+                    </lightning-combobox>
+                    <lightning-combobox label="How long have you been a client/potential client?"
+                        value={respondentInfo.clientDuration} options={clientDurationOptions}
+                        onchange={handleInputChange} name="clientDuration" class="form-field"></lightning-combobox>
+                </div>
+            </div>
+
+            <!-- Sales Interaction Assessment -->
+            <div class="form-section">
+                <h2 class="section-title">
+                    <lightning-icon icon-name="utility:assessment" size="small" class="section-icon"></lightning-icon>
+                    Sales Interaction Assessment
+                </h2>
+                <div class="intro-card">
+                    <p class="description">Please rate your level of agreement with the following statements regarding
+                        your interaction(s) with our sales team. Use the following scale: 1 - Strongly Disagree, 2 -
+                        Disagree, 3 - Neutral, 4 - Agree, 5 - Strongly Agree, N/A - Not Applicable</p>
+                </div>
+
+                <!-- Understanding Your Needs -->
+                <div class="sub-section">
+                    <h3 class="sub-section-title">(A) Understanding Your Needs</h3>
+                    <lightning-radio-group
+                        label="1. The sales representative demonstrated a clear understanding of your company's specific needs and challenges in the metal & mining sector."
+                        options={ratingOptions} value={surveyResponses.q1} onchange={handleSurveyChange} name="q1"
+                        type="button" class="radio-button-group" required>
+                    </lightning-radio-group>
+
+                    <lightning-radio-group
+                        label="2. The proposed solutions (products/services) aligned well with your stated needs."
+                        options={ratingOptions} value={surveyResponses.q2} onchange={handleSurveyChange} name="q2"
+                        type="button" class="radio-button-group" required></lightning-radio-group>
+                </div>
+
+                <!-- Product Knowledge & Expertise -->
+                <div class="sub-section">
+                    <h3 class="sub-section-title">(B) Product Knowledge & Expertise</h3>
+                    <lightning-radio-group
+                        label="3. The sales representative possessed sufficient knowledge about the metals and/or mining products/services offered."
+                        options={ratingOptions} value={surveyResponses.q3} onchange={handleSurveyChange} name="q3"
+                        type="button" class="radio-button-group" required></lightning-radio-group>
+                    <lightning-radio-group
+                        label="4. The sales representative was able to clearly explain the technical specifications and benefits of the products."
+                        options={ratingOptions} value={surveyResponses.q4} onchange={handleSurveyChange} name="q4"
+                        type="button" class="radio-button-group" required></lightning-radio-group>
+                </div>
+
+                <!-- Communication & Responsiveness -->
+                <div class="sub-section">
+                    <h3 class="sub-section-title">(C) Communication & Responsiveness</h3>
+                    <lightning-radio-group label="5. The sales representative communicated clearly and professionally."
+                        options={ratingOptions} value={surveyResponses.q5} onchange={handleSurveyChange} name="q5"
+                        type="button" class="radio-button-group" required></lightning-radio-group>
+                    <lightning-radio-group
+                        label="6. The sales representative was prompt in responding to your inquiries and requests."
+                        options={ratingOptions} value={surveyResponses.q6} onchange={handleSurveyChange} name="q6"
+                        type="button" class="radio-button-group" required></lightning-radio-group>
+                    <lightning-radio-group
+                        label="7. The sales representative informed you about the progress of your orders/requests."
+                        options={ratingOptions} value={surveyResponses.q7} onchange={handleSurveyChange} name="q7"
+                        type="button" class="radio-button-group" required></lightning-radio-group>
+                </div>
+
+                <!-- Relationship Management -->
+                <div class="sub-section">
+                    <h3 class="sub-section-title">(D) Relationship Management</h3>
+                    <lightning-radio-group
+                        label="8. The sales representative was reliable and followed through on their commitments."
+                        options={ratingOptions} value={surveyResponses.q8} onchange={handleSurveyChange} name="q8"
+                        type="button" class="radio-button-group" required></lightning-radio-group>
+                    <lightning-radio-group
+                        label="9. They demonstrated a long-term perspective in our business relationship."
+                        options={ratingOptions} value={surveyResponses.q9} onchange={handleSurveyChange} name="q9"
+                        type="button" class="radio-button-group" required></lightning-radio-group>
+                </div>
+
+                <!-- Negotiation & Value Proposition -->
+                <div class="sub-section">
+                    <h3 class="sub-section-title">(E) Negotiation & Value Proposition</h3>
+                    <lightning-radio-group
+                        label="10. The pricing and terms offered were competitive and aligned with the market value."
+                        options={ratingOptions} value={surveyResponses.q10} onchange={handleSurveyChange} name="q10"
+                        type="button" class="radio-button-group" required></lightning-radio-group>
+                    <lightning-radio-group label="11. The negotiation process was fair and transparent."
+                        options={ratingOptions} value={surveyResponses.q11} onchange={handleSurveyChange} name="q11"
+                        type="button" class="radio-button-group" required></lightning-radio-group>
+                </div>
+
+                <!-- Problem Solving & Support -->
+                <div class="sub-section">
+                    <h3 class="sub-section-title">(F) Problem Solving & Support</h3>
+                    <lightning-radio-group
+                        label="12. The sales representative was helpful in addressing any issues or concerns that arose."
+                        options={ratingOptions} value={surveyResponses.q12} onchange={handleSurveyChange} name="q12"
+                        type="button" class="radio-button-group" required></lightning-radio-group>
+                </div>
+
+                <!-- Overall Satisfaction -->
+                <div class="sub-section">
+                    <h3 class="sub-section-title">Overall Satisfaction</h3>
+                    <lightning-radio-group
+                        label="13. Overall, how satisfied were you with your interaction(s) with our sales team?"
+                        options={satisfactionOptions} value={surveyResponses.q13} onchange={handleSurveyChange}
+                        name="q13" type="button" class="radio-button-group" required></lightning-radio-group>
+                    <lightning-radio-group
+                        label="14. How likely are you to recommend our company to others in the metal & mining industry based on your experience with our sales team?"
+                        options={recommendOptions} value={surveyResponses.q14} onchange={handleSurveyChange} name="q14"
+                        type="button" class="radio-button-group" required></lightning-radio-group>
+                </div>
+
+                <!-- Thank you Note-->
+                <div class="sub-section">
+                    <p class="description"> <span style="font-weight:bold;"> Thank You: </span> Thank you again for your
+                        valuable feedback.
+                        Your input is greatly appreciated and will help us to continuously improve our sales performance
+                        and better serve your needs in the metal & mining industry.</p>
+                </div>
+            </div>
+
+            <!-- Submit Button -->
+            <div class="button-container">
+                <lightning-button label="Submit Feedback" variant="brand" onclick={submitSurvey}
+                    icon-name="utility:check" class="submit-button"></lightning-button>
+            </div>
+        </div>
+    </template>
+
+    <!-- Thank You Page -->
+    <template if:true={showThankYou}>
+        <div class="thank-you-container" style={backgroundImageStyleThank}>
+            <h1 class="page-title">Thank You!</h1>
+            <p class="description">Rest assured, your responses will stay confidential.</p>
+            <p class="description">Your insights help us serve the metal and mining industry better.</p>
+        </div>
+
+    </template>
+</template>

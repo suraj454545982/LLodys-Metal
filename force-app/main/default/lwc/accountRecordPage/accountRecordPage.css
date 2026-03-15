@@ -1,0 +1,41 @@
+:host {
+    display: block;
+    width: 100% !important;
+}
+
+.full-width-wrapper {
+    width: 100%;
+    flex-grow: 1;
+}
+
+.full-width-card {
+    width: 100% !important;
+}
+
+.full-width-datatable {
+    width: 100% !important;
+}
+.THIS .invalid-email-cell {
+    background-color: #ffe6e6; /* light red */
+    border: 1px solid red;
+}
+
+
+/* Ensure Save and Cancel buttons are sticky at the top of the cell */
+.datatable-container {
+    max-height: 400px;
+    overflow: auto;
+    margin-bottom: 60px;
+    /* Space for sticky footer */
+}
+
+.sticky-footer {
+    position: sticky;
+    bottom: 0;
+    background: #ffffff;
+    padding: 10px;
+    border-top: 1px solid #d8dde6;
+    display: flex;
+    justify-content: flex-end;
+    z-index: 1;
+}

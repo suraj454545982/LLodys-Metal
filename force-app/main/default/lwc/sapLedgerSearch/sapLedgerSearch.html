@@ -1,0 +1,64 @@
+<template>
+
+    <lightning-card>
+
+        <div class="slds-p-around_large">
+
+            <!-- SEARCH CONTAINER -->
+            <div class="ledger-container">
+
+                <!-- HEADING -->
+                <div class="ledger-heading">
+                    Ledger Search
+                </div>
+
+                <!-- INPUT FIELDS -->
+                <div class="input-center">
+
+                    <lightning-input label="Customer SAP Code" value={customerAccount} onchange={handleCustomerAccount}
+                        required>
+                    </lightning-input>
+
+                    <lightning-input label="Company Code" value={companyCode} onchange={handleCompanyCode} required>
+                    </lightning-input>
+
+                    <lightning-input type="date" label="Posting Date" value={postingDate} onchange={handlePostingDate}
+                        required>
+                    </lightning-input>
+
+                </div>
+
+                <!-- BUTTONS -->
+                <div class="button-group button-center">
+
+                    <lightning-button label="Fetch Ledger" variant="brand" onclick={handleFetchLedger}>
+                    </lightning-button>
+
+                    <lightning-button label="Copy as Excel" variant="neutral" onclick={copyToClipboard}
+                        class="slds-m-left_small">
+                    </lightning-button>
+
+                    <lightning-button label="Download as Excel" variant="brand" onclick={downloadExcel}
+                        class="slds-m-left_small">
+                    </lightning-button>
+
+                </div>
+
+            </div>
+
+            <!-- DATA TABLE -->
+            <template if:true={ledgerData}>
+                <div class="table-container">
+
+                    <lightning-datatable key-field="Document_Number" data={ledgerData} columns={columns}
+                        hide-checkbox-column>
+                    </lightning-datatable>
+
+                </div>
+            </template>
+
+        </div>
+
+    </lightning-card>
+
+</template>

@@ -1,0 +1,4 @@
+/* Make each field display in label: value format */
+lightning-output-field::part(form-element) {
+    
+}

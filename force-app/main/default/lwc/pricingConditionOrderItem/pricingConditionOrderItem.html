@@ -1,0 +1,65 @@
+<template>
+    <lightning-card title="Pricing Conditions">
+
+    <div class="slds-p-around_medium">
+
+        <div class="slds-grid slds-gutters">
+
+            <div class="slds-col slds-size_1-of-3">
+                <lightning-combobox
+                    label="Condition Type"
+                    value={conditionType}
+                    options={filteredConditionTypeOptions}
+                    onchange={handleConditionTypeChange}>
+                </lightning-combobox>
+            </div>
+
+            <div class="slds-col slds-size_1-of-3">
+                <lightning-input
+                    type="number"
+                    label={amountLabel}
+                    value={amount}
+                    onchange={handleAmountChange}>
+                </lightning-input>
+            </div>
+
+            <div class="slds-col slds-size_1-of-3">
+                <label class="slds-form-element__label">
+                    Condition Unit
+                </label>
+                <div class="slds-form-element__control slds-m-top_x-small">
+                    {computedUnit}
+                </div>
+            </div>
+
+        </div>
+
+        <div class="slds-m-top_medium">
+            <lightning-button
+                variant="brand"
+                label="Save"
+                onclick={handleSave}>
+            </lightning-button>
+
+            <lightning-button
+                class="slds-m-left_small"
+                label="Add New"
+                onclick={handleAddNew}>
+            </lightning-button>
+        </div>
+
+    </div>
+
+    <div class="slds-p-horizontal_medium slds-p-bottom_medium">
+        <lightning-datatable
+            key-field="id"
+            data={pricingConditions}
+            columns={columns}
+            onrowaction={handleRowAction}>
+        </lightning-datatable>
+    </div>
+
+</lightning-card>
+
+
+</template>

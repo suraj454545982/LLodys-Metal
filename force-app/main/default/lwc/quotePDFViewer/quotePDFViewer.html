@@ -1,0 +1,19 @@
+<!--
+  @description       : 
+  @author            : ChangeMeIn@UserSettingsUnder.SFDoc
+  @group             : 
+  @last modified on  : 07-02-2025
+  @last modified by  : ChangeMeIn@UserSettingsUnder.SFDoc
+-->
+<template>
+    <lightning-modal-header label="Quote PDF Preview"></lightning-modal-header>
+    <lightning-modal-body>
+        <div class="slds-p-around_medium">
+            <iframe src={pdfUrl} width="100%" height="500px" frameborder="0"></iframe>
+        </div>
+    </lightning-modal-body>
+    <lightning-modal-footer>
+             <lightning-button variant="brand" label="Save PDF" onclick={handleSave} class="slds-m-left_x-small"></lightning-button>
+        <lightning-button variant="brand" label="Save and Email" onclick={handleSaveAndEmail} class="slds-m-left_x-small"></lightning-button>
+    </lightning-modal-footer>
+</template>

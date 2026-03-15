@@ -1,0 +1,78 @@
+<template>
+
+    <lightning-card>
+
+        <div class="slds-p-around_large">
+
+            <!-- CONTAINER -->
+            <div class="ledger-container">
+
+                <!-- HEADING -->
+                <div class="ledger-heading">
+                    Document PDF Viewer
+                </div>
+
+                <!-- INPUTS -->
+                <div class="input-center">
+
+                    <lightning-input
+                        label="Customer SAP Code"
+                        value={customer}
+                        onchange={handleCustomer}
+                        required>
+                    </lightning-input>
+
+                    <lightning-input
+                        label="Company Code"
+                        value={companyCode}
+                        onchange={handleCompanyCode}
+                        required>
+                    </lightning-input>
+
+                    <lightning-input
+                        label="Document Number"
+                        value={documentNumber}
+                        onchange={handleDocumentNumber}
+                        required>
+                    </lightning-input>
+
+                    <lightning-input
+                        type="date"
+                        label="Posting Date"
+                        value={postingDate}
+                        onchange={handlePostingDate}
+                        required>
+                    </lightning-input>
+
+                </div>
+
+                <!-- BUTTONS -->
+                <div class="button-group">
+
+                    <lightning-button
+                        label="Fetch Document"
+                        variant="brand"
+                        onclick={fetchPdf}>
+                    </lightning-button>
+
+                    <lightning-button
+                        label="Preview PDF"
+                        variant="neutral"
+                        onclick={previewPdf}>
+                    </lightning-button>
+
+                    <lightning-button
+                        label="Download PDF"
+                        variant="brand"
+                        onclick={downloadPdf}>
+                    </lightning-button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </lightning-card>
+
+</template>

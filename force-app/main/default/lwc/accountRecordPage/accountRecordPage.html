@@ -1,0 +1,67 @@
+<template>
+    <div class="slds-grid slds-grow full-width-wrapper">
+        <lightning-card title="Accounts List" icon-name="standard:account" class="full-width-card">
+            <!-- Search + Submit side by side -->
+            <div class="slds-grid slds-grid_align-spread slds-p-horizontal_medium slds-m-bottom_medium">
+                <div class="slds-col slds-size_1-of-2">
+                    <lightning-input type="search" label="Search by Account Name" value={searchKey}
+                        onchange={handleSearchKeyChange}>
+                    </lightning-input>
+                </div>
+
+                <div class="slds-col slds-size_auto slds-align-middle slds-m-left_small">
+                    <lightning-button label="Survey for Social Media" variant="brand" onclick={handleSubmitSM}>
+                    </lightning-button>
+                    <lightning-button label="Submit" variant="brand" onclick={handleSubmit}>
+                    </lightning-button>
+                </div>
+            </div>
+
+            <!-- Modal to SM -->
+            <template if:true={isModalOpen}>
+                <section role="dialog" tabindex="-1" class="slds-modal slds-fade-in-open">
+                    <div class="slds-modal__container">
+                        <header class="slds-modal__header">
+                            <h2 class="slds-modal__title">Select Account</h2>
+                        </header>
+                        <div class="slds-modal__content slds-p-around_medium">
+                            <lightning-combobox name="accountSelect" label="Choose an Account"
+                                value={selectedAccountIdForSM} placeholder="Select an account" options={accountOptions}
+                                onchange={handleAccountSelection}>
+                            </lightning-combobox>
+                        </div>
+                        <footer class="slds-modal__footer">
+                            <lightning-button variant="neutral" label="Cancel" onclick={closeModal}></lightning-button>
+                            <lightning-button variant="brand" label="Submit" onclick={handleSMModalSubmit}
+                                class="slds-m-left_small"></lightning-button>
+                        </footer>
+                    </div>
+                </section>
+                <div class="slds-backdrop slds-backdrop_open"></div>
+            </template>
+
+            <!-- Scrollable Datatable -->
+            <div class="datatable-container">
+                <lightning-datatable key-field="Id" data={filteredAccounts} columns={columns}
+                    selected-rows={selectedRows} onrowselection={handleRowSelection} oncellchange={handleCellChange}
+                    show-row-number-column draft-values={draftValues} class="full-width-datatable">
+                </lightning-datatable>
+            </div>
+
+            <!-- Sticky custom Save/Cancel buttons -->
+            <template if:true={isEditing}>
+                <div class="sticky-footer">
+                    <lightning-button variant="brand" label="Save" onclick={handleSave}></lightning-button>
+                    <lightning-button variant="neutral" label="Cancel" onclick={handleCancel} class="slds-m-left_small">
+                    </lightning-button>
+                </div>
+            </template>
+
+
+            <!-- Error Display -->
+            <template if:true={error}>
+                <div class="slds-text-color_error slds-p-around_medium">{error}</div>
+            </template>
+        </lightning-card>
+    </div>
+</template>

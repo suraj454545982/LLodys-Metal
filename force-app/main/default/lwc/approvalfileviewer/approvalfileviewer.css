@@ -1,0 +1,32 @@
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    gap: 0.75rem;
+    padding: 0.75rem;
+	color: blue;
+}
+
+.file-tile {
+    border: 1px solid #0176d3; /* Salesforce blue */
+    border-radius: 0.5rem;
+    padding: 0.75rem;
+    text-align: center;
+    cursor: pointer;
+    background: #ffffff;
+}
+
+.file-tile:hover {
+    background: #f3f6f9;
+    box-shadow: 0 0 0 1px #0176d3;
+}
+
+.file-name {
+	
+    font-size: 0.8rem;
+    line-height: 1.2;
+    word-break: break-word;
+}
+.link-text {
+    color: #0176d3; /* Salesforce link blue */
+    font-weight: 500;
+}

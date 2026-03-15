@@ -1,0 +1,14 @@
+/* Modal header, content, and footer spacing */
+.slds-modal__header {
+    background-color: #f4f6f9;
+    border-bottom: 1px solid #d8dde6;
+    padding: 1rem;
+}
+
+.slds-modal__container {
+	max-width: 100rem !important;
+	width: 100% !important;
+}
+.slds-docked-form-footer {
+    display: none !important;
+}

@@ -1,0 +1,32 @@
+<template>
+    <lightning-card title="Files" icon-name="doctype:attachment">
+        <template if:true={hasFiles}>
+            <div class="grid-container">
+                <template for:each={files} for:item="file">
+                    <div
+                        key={file.ContentDocumentId}
+                        class="file-tile"
+                        data-id={file.ContentDocumentId}
+                        onclick={previewFile}>
+
+                        <lightning-icon
+                            icon-name="doctype:unknown"
+                            size="medium"
+                            class="slds-m-bottom_x-small">
+                        </lightning-icon>
+
+                        <div class="file-name link-text" title={file.ContentDocument.Title}>
+                            {file.ContentDocument.Title}
+                        </div>
+                    </div>
+                </template>
+            </div>
+        </template>
+
+        <template if:false={hasFiles}>
+            <div class="slds-p-around_small slds-text-color_weak">
+                No files attached.
+            </div>
+        </template>
+    </lightning-card>
+</template>

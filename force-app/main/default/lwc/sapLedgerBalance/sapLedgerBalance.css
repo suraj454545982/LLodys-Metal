@@ -1,0 +1,75 @@
+.ledger-container {
+    background-color: #f4f6f9;
+    border-radius: 10px;
+    padding: 35px;
+}
+
+.ledger-heading {
+    text-align: center;
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 30px;
+}
+
+.input-center {
+    max-width: 500px;
+    margin: auto;
+}
+
+.button-group {
+    display: flex;
+    justify-content: center;
+    margin-top: 25px;
+}
+
+/* CARD CENTERING */
+
+.balance-wrapper {
+    display: flex;
+    justify-content: center;
+    margin-top: 35px;
+}
+
+.balance-card {
+    width: 600px;
+    background: white;
+    border-radius: 10px;
+    padding: 25px;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+}
+
+/* CUSTOMER HEADER */
+
+.customer-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.label {
+    font-weight: 600;
+    margin-right: 8px;
+}
+
+/* AGING TABLE */
+
+.aging-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+.aging-table td {
+    padding: 10px;
+    border-bottom: 1px solid #e5e5e5;
+}
+
+/* TOTAL */
+
+.total-section {
+    font-size: 18px;
+    font-weight: bold;
+    text-align: right;
+    border-top: 2px solid #e5e5e5;
+    padding-top: 12px;
+}

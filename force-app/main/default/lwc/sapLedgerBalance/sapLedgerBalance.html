@@ -1,0 +1,118 @@
+<template>
+    <lightning-card>
+
+        <div class="slds-p-around_large">
+
+            <!-- SEARCH CONTAINER -->
+            <div class="ledger-container">
+
+                <div class="ledger-heading">
+                    Ledger Balance
+                </div>
+
+                <div class="input-center">
+
+                    <lightning-input
+                        label="Customer SAP Code"
+                        value={customerAccount}
+                        onchange={handleCustomerAccount}
+                        required>
+                    </lightning-input>
+
+                    <lightning-input
+                        label="Company Code"
+                        value={companyCode}
+                        onchange={handleCompanyCode}
+                        required>
+                    </lightning-input>
+
+                    <lightning-input
+                        type="date"
+                        label="Posting Date"
+                        value={postingDate}
+                        onchange={handlePostingDate}
+                        required>
+                    </lightning-input>
+
+                </div>
+
+                <div class="button-group">
+                    <lightning-button
+                        label="Fetch Balance"
+                        variant="brand"
+                        onclick={handleFetchBalance}>
+                    </lightning-button>
+                </div>
+
+            </div>
+
+
+            <!-- BALANCE CARD -->
+            <template if:true={balanceData}>
+
+                <div class="balance-wrapper">
+
+                    <div class="balance-card">
+
+                        <!-- Customer Info -->
+                        <div class="customer-header">
+
+                            <div>
+                                <span class="label">Customer</span>
+                                <span class="value">{balanceData.Customer_Name}</span>
+                            </div>
+
+                            <div>
+                                <span class="label">Category</span>
+                                <span class="value">{balanceData.Category}</span>
+                            </div>
+
+                        </div>
+
+                        <!-- Aging Table -->
+                        <table class="aging-table">
+
+                            <tr>
+                                <td>0 - 30 Days</td>
+                                <td>{balanceData.Day_1to30}</td>
+                                <td>31 - 60 Days</td>
+                                <td>{balanceData.Day_31to60}</td>
+                            </tr>
+
+                            <tr>
+                                <td>61 - 90 Days</td>
+                                <td>{balanceData.Day_61to90}</td>
+                                <td>91 - 120 Days</td>
+                                <td>{balanceData.Day_91to120}</td>
+                            </tr>
+
+                            <tr>
+                                <td>121 - 150 Days</td>
+                                <td>{balanceData.Day_121to150}</td>
+                                <td>151 - 180 Days</td>
+                                <td>{balanceData.Day_151to180}</td>
+                            </tr>
+
+                            <tr>
+                                <td>Other Due</td>
+                                <td colspan="3">{balanceData.Other_Due}</td>
+                            </tr>
+
+                        </table>
+
+                        <!-- Total -->
+                        <div class="total-section">
+                            Total Balance : {balanceData.Total_Value}
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </template>
+
+        </div>
+
+    </lightning-card>
+
+</template>

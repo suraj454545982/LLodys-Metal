@@ -1,0 +1,564 @@
+/* Survey Form Styles - Matching Existing Structure */
+.survey-container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 2rem;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+}
+
+.intro-card {
+    background-color: #fff;
+    padding: 1.5rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 2rem;
+    border-left: 4px solid #e30613;
+}
+
+.form-section {
+    margin-bottom: 2rem;
+    background-color: #fff;
+    padding: 1.5rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.section-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 1.5rem;
+    color: #333;
+    display: flex;
+    align-items: center;
+}
+
+.section-icon {
+    margin-right: 0.5rem;
+}
+
+.form-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1rem;
+}
+
+.form-field {
+    margin-bottom: 1rem;
+}
+
+.sub-section {
+    margin-bottom: 1.5rem;
+    padding: 1rem;
+    background-color: #f5f5f5;
+    border-radius: 6px;
+}
+
+.sub-section-title {
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+    color: #e30613;
+}
+
+.radio-button-group {
+    margin-bottom: 1.5rem;
+    max-width: 100%;
+    /* Ensure radio group doesn't exceed parent container */
+    overflow-x: auto;
+    /* Fallback for horizontal scrolling, though wrapping should prevent this */
+}
+
+.radio-button-group lightning-radio-group {
+    display: flex;
+    flex-wrap: wrap;
+    /* Allow radio buttons to wrap to prevent overflow */
+    gap: 0.5rem;
+    /* Spacing between radio buttons */
+    justify-content: flex-start;
+    /* Align to start to avoid stretching */
+}
+
+.radio-button-group lightning-radio-group .slds-radio {
+    flex: 0 0 auto;
+    /* Prevent radio buttons from growing too wide */
+    min-width: 80px;
+    /* Ensure buttons have a minimum width for readability */
+}
+
+.button-container {
+    text-align: center;
+    margin-top: 2rem;
+}
+
+.submit-button {
+    background-color: #e30613;
+    color: #fff;
+    padding: 0.75rem 2rem;
+    border-radius: 20px;
+    transition: background-color 0.3s ease;
+}
+
+.submit-button:hover {
+    background-color: #c20510;
+}
+
+/* Mobile Responsive Styles for Survey */
+
+/* Tablet responsive (up to 768px) */
+@media (max-width: 768px) {
+    .survey-container {
+        margin: 1rem;
+        padding: 1.5rem;
+        max-width: calc(100% - 2rem);
+        border-radius: 8px;
+    }
+
+    .intro-card,
+    .form-section {
+        padding: 1rem;
+        margin-bottom: 1.5rem;
+        border-radius: 6px;
+    }
+
+    .section-title {
+        font-size: 1.3rem;
+        margin-bottom: 1.2rem;
+    }
+
+    .form-grid {
+        grid-template-columns: 1fr;
+        gap: 0.75rem;
+    }
+
+    .sub-section {
+        padding: 0.75rem;
+        margin-bottom: 1.2rem;
+        border-radius: 4px;
+    }
+
+    .sub-section-title {
+        font-size: 1.1rem;
+        margin-bottom: 0.8rem;
+    }
+
+    .form-field {
+        margin-bottom: 0.75rem;
+    }
+
+    .radio-button-group {
+        margin-bottom: 1.2rem;
+    }
+
+    .radio-button-group lightning-radio-group {
+        display: block;
+        /* Stack radio buttons vertically */
+        flex-wrap: nowrap;
+        /* Disable wrapping since we're stacking */
+    }
+
+    .radio-button-group lightning-radio-group .slds-radio {
+        margin-bottom: 0.5rem;
+        /* Spacing for stacked radio buttons */
+    }
+
+    .button-container {
+        margin-top: 1.5rem;
+    }
+
+    .submit-button {
+        width: 100%;
+        max-width: 300px;
+        padding: 0.875rem 1.5rem;
+        font-size: 1rem;
+    }
+}
+
+/* Mobile devices (up to 480px) */
+@media (max-width: 480px) {
+    .survey-container {
+        margin: 0.5rem;
+        padding: 1rem;
+        max-width: calc(100% - 1rem);
+        border-radius: 6px;
+    }
+
+    .intro-card,
+    .form-section {
+        padding: 0.75rem;
+        margin-bottom: 1rem;
+        border-radius: 4px;
+        box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .section-title {
+        font-size: 1.1rem;
+        margin-bottom: 1rem;
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .section-icon {
+        margin-right: 0;
+        margin-bottom: 0.25rem;
+    }
+
+    .form-grid {
+        grid-template-columns: 1fr;
+        gap: 0.5rem;
+    }
+
+    .sub-section {
+        padding: 0.5rem;
+        margin-bottom: 1rem;
+        border-radius: 4px;
+    }
+
+    .sub-section-title {
+        font-size: 1rem;
+        margin-bottom: 0.75rem;
+    }
+
+    .form-field {
+        margin-bottom: 0.5rem;
+    }
+
+    .radio-button-group {
+        margin-bottom: 1rem;
+    }
+
+    .radio-button-group lightning-radio-group {
+        display: block;
+        /* Stack vertically */
+    }
+
+    .radio-button-group lightning-radio-group .slds-radio {
+        margin-bottom: 0.5rem;
+    }
+
+    .button-container {
+        margin-top: 1rem;
+        padding: 0 0.5rem;
+    }
+
+    .submit-button {
+        width: 100%;
+        padding: 1rem;
+        font-size: 0.95rem;
+        font-weight: 600;
+    }
+}
+
+/* For medium mobile range (481px to 684px) */
+@media (min-width: 481px) and (max-width: 684px) {
+    .survey-container {
+        margin: 0.5rem;
+        padding: 1rem;
+        max-width: calc(100% - 1rem);
+        border-radius: 6px;
+    }
+
+    .intro-card,
+    .form-section {
+        padding: 1rem;
+        margin-bottom: 1.2rem;
+    }
+
+    .section-title {
+        font-size: 1.2rem;
+        margin-bottom: 1.2rem;
+    }
+
+    .sub-section-title {
+        font-size: 1.05rem;
+    }
+
+    .radio-button-group {
+        margin-bottom: 1rem;
+    }
+
+    .radio-button-group lightning-radio-group {
+        display: block;
+        /* Stack vertically */
+    }
+
+    .radio-button-group lightning-radio-group .slds-radio {
+        margin-bottom: 0.5rem;
+    }
+
+    .submit-button {
+        width: 100%;
+        font-size: 1rem;
+    }
+}
+
+/* Thank You Page Styles */
+.thank-you-container {
+    text-align: center;
+    padding: 2rem;
+    max-width: 600px;
+    margin: 0 auto;
+    height: 400px;
+}
+
+.mining-illustration-container {
+    width: 100%;
+    height: 200px;
+    background: url('path-to-mining-illustration.png') no-repeat center;
+    background-size: contain;
+}
+
+:host {
+    display: block;
+    font-family: Arial, sans-serif;
+}
+
+/* Welcome Page Styles */
+.welcome-container {
+    text-align: center;
+    padding: 2rem;
+    border-radius: 10px;
+    position: relative;
+    max-width: 850px;
+    margin: 0 auto;
+    background-color: #fff;
+    background-size: contain;
+    background-position: center bottom;
+    background-repeat: no-repeat;
+    min-height: 750px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.content-overlay {
+    position: relative;
+    z-index: 2;
+    padding: 2rem;
+    border-radius: 8px;
+    margin: 2rem 1rem 1rem 1rem;
+    width: 100%;
+    max-width: 600px;
+}
+
+.main-content {
+    width: 100%;
+}
+
+.gear-container {
+    position: absolute;
+    top: -50px;
+    left: -50px;
+    width: 100px;
+    height: 100px;
+    background: url('path-to-gear-icon.png') no-repeat center;
+    background-size: contain;
+}
+
+.page-title {
+    color: #e30613;
+    font-size: 3.5rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+    line-height: 1.2;
+}
+
+.sub-title {
+    color: #333;
+    font-size: 1.5rem;
+    font-weight: normal;
+    margin-bottom: 1.5rem;
+    line-height: 1.3;
+}
+
+.description-container {
+    margin-bottom: 2rem;
+}
+
+.description {
+    font-size: 1rem;
+    margin: 0.5rem 0;
+    line-height: 1.5;
+    color: #555;
+}
+
+.feedback-button {
+    margin: 1rem 0;
+    border: 2px solid #e30613;
+    background-color: #fff;
+    color: #e30613;
+    padding: 12px 24px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.feedback-button:hover {
+    background-color: #e30613;
+    color: #fff;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(227, 6, 19, 0.3);
+}
+
+.illustration-container {
+    width: 100%;
+    height: 150px;
+    background: url('path-to-welcome-illustration.png') no-repeat center;
+    background-size: contain;
+    margin-top: 2rem;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .welcome-container {
+        margin: 1rem;
+        padding: 1.5rem;
+        min-height: 600px;
+        max-width: 100%;
+        border-width: 3px;
+        background-size: contain;
+        background-position: center bottom;
+    }
+
+    .content-overlay {
+        margin: 1rem 0.5rem;
+        padding: 1.5rem;
+    }
+
+    .page-title {
+        font-size: 2.5rem;
+        margin-bottom: 0.8rem;
+    }
+
+    .sub-title {
+        font-size: 1.3rem;
+        margin-bottom: 1.2rem;
+    }
+
+    .description {
+        font-size: 0.95rem;
+    }
+
+    .feedback-button {
+        font-size: 1rem;
+        padding: 10px 20px;
+        width: 100%;
+        max-width: 280px;
+    }
+
+    .gear-container {
+        width: 80px;
+        height: 80px;
+        top: -40px;
+        left: -40px;
+    }
+}
+
+@media (max-width: 480px) {
+    .welcome-container {
+        margin: 0.5rem;
+        padding: 1rem;
+        min-height: 300px;
+        border-width: 2px;
+        background-size: contain;
+        background-position: center bottom;
+    }
+
+    .content-overlay {
+        margin: 0.5rem;
+        padding: 1rem;
+    }
+
+    .page-title {
+        font-size: 1.8rem;
+    }
+
+    .sub-title {
+        font-size: 0.6rem;
+    }
+
+    .description {
+        font-size: 0.6rem;
+    }
+
+    .gear-container {
+        display: none;
+    }
+
+    .description-container {
+        margin-bottom: 0.2rem;
+    }
+
+    .feedback-button {
+        font-size: 7px;
+        width: 100%;
+    }
+}
+
+@media (min-width: 481px) and (max-width: 684px) {
+    .welcome-container {
+        margin: 0.5rem;
+        padding: 1rem;
+        min-height: 400px;
+        border-width: 2px;
+        background-size: contain;
+        background-position: center bottom;
+    }
+
+    .content-overlay {
+        margin: 0.5rem;
+        padding: 1rem;
+    }
+
+    .page-title {
+        font-size: 1.8rem;
+    }
+
+    .sub-title {
+        font-size: 0.6rem;
+    }
+
+    .description {
+        font-size: 0.6rem;
+    }
+
+    .gear-container {
+        display: none;
+    }
+
+    .description-container {
+        margin-bottom: 0.2rem;
+    }
+
+    .feedback-button {
+        font-size: 7px;
+        width: 100%;
+    }
+}
+
+/* For very large screens */
+@media (min-width: 1200px) {
+    .welcome-container {
+        min-height: 800px;
+    }
+
+    .page-title {
+        font-size: 3.5rem;
+    }
+
+    .sub-title {
+        font-size: 1.8rem;
+    }
+}
+
+
+.otp-input-field input {
+    text-align: center;
+    letter-spacing: 0.2em;
+    font-size: 1.2rem;
+    font-weight: 600;
+}
+.slds-modal__container {
+    max-width: 400px;
+}
